@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans+Arabic:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   GLOBAL DESIGN SYSTEM
+   TODO: غيّر الألوان دي لألوان الشركة الحقيقية
+   ============================================================ */
+
+
+/* ── Dark Theme ────────────────────────────────────────────── */
+[data-theme="dark"] {
+    --primary: #A67C52;
+    --primary-dark: #8B6441;
+    --secondary: #33A1FD;
+    --bg-main: #1A1A1A;
+    --bg-navbar: rgba(26, 26, 26, 0.88);
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --bg-dropdown: #252525;
+    --border: rgba(166, 124, 82, 0.18);
+    --text-main: #E0E0E0;
+    --text-muted: #9A9A9A;
+    --glow: rgba(166, 124, 82, 0.35);
+    --toggle-bg: rgba(166, 124, 82, 0.12);
+    --toggle-color: #C4975A;
+    --toggle-border: rgba(166, 124, 82, 0.25);
+    --deco1-opacity: 0.08;
+    --deco2-opacity: 0.07;
+    --deco3-opacity: 0.05;
+}
+
+/* ── Light Theme ───────────────────────────────────────────── */
+[data-theme="light"] {
+    --primary: #8B6441;
+    --primary-dark: #6B4E2E;
+    --secondary: #1a8de8;
+    --bg-main: #F5F0EB;
+    --bg-navbar: rgba(245, 240, 235, 0.92);
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.9);
+    --bg-dropdown: #FFFFFF;
+    --border: rgba(139, 100, 65, 0.18);
+    --text-main: #2C1F10;
+    --text-muted: #6B5A48;
+    --glow: rgba(139, 100, 65, 0.25);
+    --toggle-bg: rgba(139, 100, 65, 0.1);
+    --toggle-color: #8B6441;
+    --toggle-border: rgba(139, 100, 65, 0.3);
+    --deco1-opacity: 0.06;
+    --deco2-opacity: 0.05;
+    --deco3-opacity: 0.04;
+}
+
+/* ── Base Reset ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: 'Playpen Sans Arabic', system-ui, sans-serif;
+}
+
+body {
+    /* font-family: 'Playpen Sans Arabic', system-ui, sans-serif; */
+    background: var(--bg-main, #1A1A1A);
+    color: var(--text-main, #E0E0E0);
+    transition: background 0.3s ease, color 0.3s ease;
+    margin: 0;
+}
+
+/* ── Typography ────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-main);
+}
+
+input:where([type='checkbox']):checked,
+input:where([type='radio']):checked,
+input:where([type='checkbox']):checked:hover,
+input:where([type='checkbox']):checked:focus,
+input:where([type='radio']):checked:hover,
+input:where([type='radio']):checked:focus,
+input:where([type='checkbox']):indeterminate,
+input:where([type='radio']):indeterminate,
+input:where([type='checkbox']):indeterminate:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 38px;
+    padding: 0 1.25rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #A67C52, #8B6441);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(166, 124, 82, 0.4);
+    letter-spacing: 0.03em;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(166, 124, 82, 0.55);
+    background: linear-gradient(135deg, #B88D63, #A67C52);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-large {
+    padding: 0.85rem 2.2rem;
+    font-size: 1.05rem;
+    border-radius: 12px;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(166, 124, 82, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(166, 124, 82, 0.12);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-navbar);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+}
+
+.navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-end {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* ── Navbar Toggles (Theme + Language) ──────────────────────── */
+.theme-toggle,
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    height: 38px;
+    padding: 0 0.9rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: var(--toggle-bg);
+    color: var(--toggle-color);
+    border: 1px solid var(--toggle-border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Icon-only theme toggle: make it square */
+.theme-toggle {
+    min-width: 38px;
+    padding: 0;
+}
+
+/* Lang toggle needs a bit of space for the text */
+.lang-toggle {
+    min-width: 64px;
+}
+
+.theme-toggle:hover,
+.lang-toggle:hover {
+    filter: brightness(1.15);
+    border-color: var(--primary);
+}
+
+.theme-toggle svg,
+.lang-toggle svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ── Logo ───────────────────────────────────────────────────── */
+.logo-area {
+    display: flex;
+}
+
+.logo-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-placeholder svg {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--toggle-color);
+    letter-spacing: 0.02em;
+}
+
+/* ── Company Logo Chip ──────────────────────────────────────── */
+.logo-chip {
+    background: var(--primary);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(166, 124, 82, 0.35);
+}
+
+.logo-chip--sm {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+}
+
+.logo-chip--lg {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(166, 124, 82, 0.45);
+    animation: float 4s ease-in-out infinite;
+}
+
+.company-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* SVG fill = page bg so logo letterforms look like an embossed bronze seal */
+.company-svg-fill {
+    fill: var(--bg-main);
+    transition: fill 0.3s ease;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ── Form Inputs (global baseline) ─────────────────────────── */
+input,
+textarea,
+select {
+    font-family: 'Playpen Sans Arabic', system-ui, sans-serif;
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: border-color 0.2s ease;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.15);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(166, 124, 82, 0.3);
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(166, 124, 82, 0.6);
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+::selection {
+    background: rgba(166, 124, 82, 0.35);
+    color: #fff;
+}
